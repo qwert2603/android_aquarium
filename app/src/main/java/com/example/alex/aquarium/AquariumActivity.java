@@ -1,0 +1,63 @@
+package com.example.alex.aquarium;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+
+public class AquariumActivity extends Activity {
+
+    private AquariumView mAquariumView;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+
+    private final AquariumStepNotificationThread mAquariumStepNotificationThread = new AquariumStepNotificationThread();
+
+    private Runnable mStepRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mAquariumView.step();
+        }
+    };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
+        mAquariumView = new AquariumView(this);
+        setContentView(mAquariumView);
+        mAquariumStepNotificationThread.start();
+    }
+
+    @Override
+    public void onDestroy() {
+        mAquariumStepNotificationThread.makeStop();
+        super.onDestroy();
+    }
+
+    private class AquariumStepNotificationThread extends Thread {
+        private volatile boolean mStop = false;
+
+        @Override
+        public void run() {
+            try {
+                while (true) {
+                    synchronized (this) {
+                        if (mStop) {
+                            break;
+                        }
+                    }
+                    Thread.sleep(42);
+                    mHandler.post(mStepRunnable);
+                }
+            } catch (Exception e) {
+                Log.e("AASSDD", e.toString(), e);
+            }
+        }
+
+        synchronized void makeStop() {
+            mStop = true;
+        }
+    }
+
+}

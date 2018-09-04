@@ -1,0 +1,12 @@
+<resources>
+
+    <color name="aquarium_background">@android:color/white</color>
+
+    <color name="mainHish">#000000</color>
+    <color name="hish">#ff0000</color>
+    <color name="hish2">#ffff00</color>
+    <color name="trav">#00ff00</color>
+    <color name="trav2">#0000ff</color>
+    <color name="horror">#00ff66ff</color>
+
+</resources>
