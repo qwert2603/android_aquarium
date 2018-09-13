@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">debug aquarium</string>
+    <string name="app_name" translatable="false">aquarium debug</string>
 </resources>
