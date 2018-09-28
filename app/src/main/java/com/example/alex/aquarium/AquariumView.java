@@ -169,20 +169,6 @@ public class AquariumView extends View {
         return true;
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(hasWindowFocus);
-        if (hasWindowFocus) {
-            getRootView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_IMMERSIVE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN);
-        }
-    }
-
     private void addHorrorFish(float x, float y) {
         if (mAquarium != null && mAquarium.getFishes().get(mHorrorType).size() < mHorrorType.getMaxCount()) {
             mAquarium.addFish(new Fish(mAquarium, mHorrorType, x, y, 0));
